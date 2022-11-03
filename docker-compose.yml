@@ -1,4 +1,12 @@
 services:
+  angular-app:
+    image: esgi.angular-app
+    container_name: angular-app
+    build: ./FRONT/APP.Web/vaultapp
+    ports:
+      - '8080:80'
+    depends_on:
+      - dotnet-api
   dotnet-api:
     image: esgi.dotnet-api 
     container_name: dotnet-api
