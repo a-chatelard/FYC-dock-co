@@ -1,0 +1,19 @@
+services:
+  dotnet-api:
+    image: esgi.dotnet-api
+    container_name: dotnet-api
+    build: ./BACK/API.Library
+    ports:
+      - '5000:5000'
+    depends_on:
+      - sql-server
+  sql-server:
+    image: esgi.sql-server
+    container_name: sql-server
+    build:
+      context: ./BACK/SQL.Scripts
+      args:
+        - A_SA_PASSWORD=@Password123
+        - A_ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
