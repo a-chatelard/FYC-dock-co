@@ -1,19 +1,32 @@
 services:
-  dotnet-api:
-    image: esgi.dotnet-api
-    container_name: dotnet-api
+  api-dotnet:
+    image: fyc/dotnet-api
+    container_name: fyc-dotnet-api
     build: ./BACK/API.Library
     ports:
-      - '5000:5000'
+      - "5000:5000"
     depends_on:
       - sql-server
+    networks:
+      - back-end
   sql-server:
-    image: esgi.sql-server
-    container_name: sql-server
-    build:
-      context: ./BACK/SQL.Scripts
-      args:
-        - A_SA_PASSWORD=@Password123
-        - A_ACCEPT_EULA=Y
+    image: fyc/sql-server
+    container_name: fyc-sql-server
+    build: ./BACK/SQL.Scripts
+    environment:
+      - SA_PASSWORD=@Password123
+      - ACCEPT_EULA=Y
     ports:
       - "1433:1433"
+    networks:
+      - back-end
+    volumes:
+      - db-data:/var/opt/mssql/data
+
+volumes:
+  db-data:
+
+
+networks:
+  back-end:
+    driver: bridge
