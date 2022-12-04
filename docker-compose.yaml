@@ -2,26 +2,38 @@ services:
   api-dotnet:
     image: fyc/dotnet-api
     container_name: fyc-dotnet-api
-    build: ./BACK/API.Library
+    build:
+      context: ./BACK
+      dockerfile: API.Dockerfile
     ports:
       - "5000:5000"
     depends_on:
       - sql-server
     networks:
       - back-end
+      - front-end
   sql-server:
     image: fyc/sql-server
     container_name: fyc-sql-server
-    build: ./BACK/SQL.Scripts
+    build:
+      context: ./BACK
+      dockerfile: Database.Dockerfile
     environment:
       - SA_PASSWORD=@Password123
-      - ACCEPT_EULA=Y
     ports:
       - "1433:1433"
-    networks:
-      - back-end
     volumes:
       - db-data:/var/opt/mssql/data
+    networks:
+      - back-end
+  app-angular:
+    image: fyc/angular-app
+    container_name: fyc-agular-app
+    build: ./FRONT/APP.Web/vaultapp
+    ports:
+      - "8081:80"
+    networks:
+      - front-end
 
 volumes:
   db-data:
@@ -29,4 +41,6 @@ volumes:
 
 networks:
   back-end:
+    driver: bridge
+  front-end:
     driver: bridge
