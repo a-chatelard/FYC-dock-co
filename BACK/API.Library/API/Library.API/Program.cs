@@ -37,7 +37,7 @@ builder.Services.AddValidatorsFromAssemblyContaining(typeof(ApplicationEntryPoin
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-var app = builder.Build();5
+var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
