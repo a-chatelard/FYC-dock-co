@@ -37,7 +37,13 @@ builder.Services.AddValidatorsFromAssemblyContaining(typeof(ApplicationEntryPoin
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-var app = builder.Build();
+var app = builder.Build();5
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dataContext.Database.Migrate();
+}
 
 app.UseCors();
 
