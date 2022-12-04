@@ -39,6 +39,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dataContext.Database.Migrate();
+}
+
 app.UseCors();
 
 app.UseSwagger();
