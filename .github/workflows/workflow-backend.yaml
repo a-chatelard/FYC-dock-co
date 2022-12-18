@@ -1,0 +1,28 @@
+name: build & test for API.Library
+on:
+  push:
+    branches:
+      - 5-CICD
+    paths:
+      - 'BACK/**'
+      - '.github/workflows/workflow-backend.yaml'
+
+defaults:
+  run:
+    working-directory: ./BACK/API.Library
+
+jobs:
+  api-library:
+    runs-on: ubuntu-latest
+    env:
+      SpecFlowDirectory: Tests/Library.Tests.Specs
+      SpecFlowTestAssemblyPath: bin/Release/net6.0/Library.Tests.Specs.dll
+      SpecFlowTestExecutionPath: bin/Release/net6.0/TestExecution.json
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+      - name: Build all projects
+        run: dotnet build -c Release
+        shell: bash
