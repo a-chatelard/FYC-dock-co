@@ -2,7 +2,7 @@ name: CI/CD backend in Docker
 on:
   push:
     branches:
-      - 5-CICD
+      - 5-CICD-fullCorrection
     paths:
       - 'BACK/API.Library/**'
       - '.github/workflows/workflow-backend.yaml'

@@ -2,7 +2,7 @@ name: CI / CD frontend in Docker
 on:
   push:
     branches:
-      - 5-CICD
+      - 5-CICD-fullCorrection
     paths:
       - 'FRONT/**'
       - '.github/workflows/workflow-frontend.yaml'
