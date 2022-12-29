@@ -48,7 +48,8 @@ jobs:
           name: SpecflowTestResults
           path: BACK/API.Library/LivingDoc.html
 
-      - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      - name: Get git tags
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
       - id: nextversion
         name: next release version
@@ -59,7 +60,6 @@ jobs:
         with:
           tag_name: ${{ steps.nextversion.outputs.version }}
           generate_release_notes: true
-          fail_on_unmatched_files: true
           target_commitish: ${{ github.ref }}
 
       - name: Log in to Docker Hub
