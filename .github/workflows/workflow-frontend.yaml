@@ -2,7 +2,7 @@ name: CI / CD frontend in Docker
 on:
   push:
     branches:
-      - 5-CICD-SpecFlow-LivingDoc
+      - 5-CICD-test
     paths:
       - 'FRONT/**'
       - '.github/workflows/workflow-frontend.yaml'
