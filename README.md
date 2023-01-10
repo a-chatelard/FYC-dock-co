@@ -8,7 +8,7 @@
 ## Support d'exercices pour le projet de mémoire de Master 2 ESGI
 Find Your Course : "DOCKER COMPOSE : DE L'ASSEMBLAGE D'IMAGES AU DÉPLOIEMENT"
 
-## Membre du groupe :
+## Membres du groupe :
 - Antoine CHATELARD
 - Marion PLAYOUT
 - Julien POTY
